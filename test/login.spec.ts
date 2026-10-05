@@ -12,6 +12,6 @@ test.describe('Login Tests', () => {
         await loginPage.signIn(email, password);
         await loginPage.selectEnterprise();
         await loginPage.selectCommunicationEffectiveness();
-        // my changes
+        // my changes updated
     });
 });
