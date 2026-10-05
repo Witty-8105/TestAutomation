@@ -1,12 +1,18 @@
-export function getLoginCredentials(): { email: string; password: string } {
-    const email = process.env.LOGIN_EMAIL;
+export interface LoginCredentials {
+    email: string;
+    password: string;
+}
+
+export function getLoginCredentials(): LoginCredentials {
+    const email = process.env.LOGIN_EMAIL?.trim();
     const password = process.env.LOGIN_PASSWORD;
 
-    if (!email || !password) {
+    if (!email || !password?.trim()) {
         throw new Error(
-            'Set LOGIN_EMAIL and LOGIN_PASSWORD in your local .env file before running authenticated tests.'
+            'Missing login credentials. Set LOGIN_EMAIL and LOGIN_PASSWORD in your local .env file before running authenticated tests.'
         );
     }
 
     return { email, password };
+    //error has fixed
 }
