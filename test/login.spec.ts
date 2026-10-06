@@ -10,8 +10,8 @@ test.describe('Login Tests', () => {
 
         const { email, password } = getLoginCredentials();
         await loginPage.signIn(email, password);
-        await loginPage.selectEnterprise();
+        await loginPage.selectEnterprise();/////////
         await loginPage.selectCommunicationEffectiveness();
-        // my changes
+        // my changes updated
     });
 });
