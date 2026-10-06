@@ -9,11 +9,6 @@ const apiUrls = (process.env.DASHBOARD_API_URLS ?? '')
     .filter(Boolean);
 
 test.describe('Dashboard', () => {
-    test.skip(
-        apiUrls.length === 0,
-        'Set DASHBOARD_API_URLS in .env with comma-separated dashboard API paths.'
-    );
-
     test('captures successful dashboard API responses when applying a date filter', async ({ page }) => {
         const loginPage = new LoginPage(page);
         const dashboard = new Dashboard(page);
@@ -30,7 +25,10 @@ test.describe('Dashboard', () => {
 
         const responses = await dashboard.captureApis(apiUrls);
 
-        expect(responses).toHaveLength(apiUrls.length);
+        expect(responses.length).toBeGreaterThan(0);
+        if (apiUrls.length > 0) {
+            expect(responses).toHaveLength(apiUrls.length);
+        }
         for (const response of responses) {
             expect(response.status).toBe(200);
             expect(response.data).toBeDefined();
